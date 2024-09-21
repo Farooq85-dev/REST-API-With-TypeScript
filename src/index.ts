@@ -1,7 +1,14 @@
-import fs from "fs";
+import dotenv from "dotenv";
+import connectDB from "./db/index";
+import { app } from "./app";
 
-const addNumber = function (a: number, b: number) {
-  return a + b;
-};
+// Load environment variables from .env file
+dotenv.config({ path: "./.env" });
 
-console.log(addNumber(1, 2));
+// Connecting To Database
+connectDB();
+
+// Listening App
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`---- Server is running at ${process.env.PORT} ----`);
+});
